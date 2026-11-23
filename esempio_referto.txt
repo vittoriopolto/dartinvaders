@@ -1,0 +1,41 @@
+CAMPIONATO: SoftDart Piemonte 2026 - Cat. A Girone 02
+PARTITA: 32
+TURNO: Ritorno 1
+DATA: 2026-11-12
+LUOGO: Vecchio Legno, Torino
+CASA: Dart Invaders | Capitano: Fabio Polizzi
+OSPITE: Rad-Tac | Capitano: Giovanni Cappello
+
+C1 | De Bortoli Gianpietro | 07/1549
+C2 | Polto Vittorio | 07/2270
+C3 | Salzedo Paolo | 07/620
+C4 | Salzedo Claudio | 07/619
+C5 | Marino Andrea | 07/618
+O1 | Masetti Mattia | 07/1667
+O2 | Cappello Giovanni | 07/1846
+O3 | Sponga Emanuela | 07/684
+O4 | Nero Daniele | 07/1923
+O5 | Burzio Samuele | 07/2886
+
+S1 | C1 | 1-2 | O1
+S2 | C2 | 2-0 | O2
+S3 | C3 | 2-0 | O3
+S4 | C4 | 1-2 | O4
+S5 | C1 | 2-0 | O3
+S6 | C2 | 2-0 | O4
+S7 | C3 | 2-0 | O1
+S8 | C4 | 0-2 | O2
+D1 | C1+C2 | 2-0 | O4+O5
+D2 | C3+C4 | 2-0 | O1+O2
+S9 | C1 | 2-0 | O4
+S10 | C2 | 0-2 | O5
+S11 | C3 | 2-0 | O2
+S12 | C5 | 2-1 | O1
+S13 | C1 | 2-0 | O2
+S14 | C2 | 2-0 | O1
+S15 | C3 | 2-0 | O4
+S16 | C5 | 2-0 | O5
+D3 | C1+C5 | 2-1 | O2+O5
+D4 | C2+C3 | 2-0 | O1+O4
+
+TOTALE: legs 34-10 | set 16-4 | punti 3-0

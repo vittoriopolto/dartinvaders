@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+{% block title %}Accedi - DartsInvaders{% endblock %}
+{% block content %}
+<div class="login">
+  <h1>Accedi</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="fields">
+      {% for field in form %}
+      <div><label for="{{ field.id_for_label }}">{{ field.label }}</label>{{ field }}{{ field.errors }}</div>
+      {% endfor %}
+    </div>
+    <input type="hidden" name="next" value="{{ next }}">
+    <div class="actions"><button class="btn primary" type="submit">Entra</button></div>
+  </form>
+</div>
+{% endblock %}

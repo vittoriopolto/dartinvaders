@@ -1,0 +1,159 @@
+:root {
+  --void: #000;
+  --ink: #e9f2ec;
+  --dim: #8a978f;
+  --saber: #3dff8a;
+  --sith: #ff2b2b;
+  --line: #1f2b23;
+  --display: "Orbitron", "Eurostile", "Arial Black", sans-serif;
+  --body: "Rajdhani", "Segoe UI", system-ui, sans-serif;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background-color: var(--void);
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, #ffffff55, transparent),
+    radial-gradient(1px 1px at 110px 90px, #ffffff33, transparent),
+    radial-gradient(1.5px 1.5px at 170px 20px, #3dff8a44, transparent);
+  background-size: 200px 130px;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 18px;
+  line-height: 1.45;
+}
+a { color: var(--saber); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid var(--saber); outline-offset: 2px; }
+
+.topbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 24px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--saber);
+  box-shadow: 0 1px 14px #3dff8a33;
+  background: var(--void);
+}
+.brand { font-family: var(--display); font-weight: 900; font-size: 22px; letter-spacing: .06em; color: var(--saber); text-shadow: 0 0 12px #3dff8a88; }
+.brand span { color: var(--sith); text-shadow: 0 0 12px #ff2b2b88; }
+.brand:hover { text-decoration: none; }
+nav { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 22px; }
+nav a, nav button { color: var(--ink); font-size: 17px; font-weight: 500; }
+nav a:hover { color: var(--saber); text-decoration: none; }
+form.inline { display: inline; margin: 0; }
+button.link { background: none; border: 0; padding: 0; font: inherit; color: var(--dim); cursor: pointer; }
+button.link:hover { color: var(--sith); }
+
+main { max-width: 980px; margin: 0 auto; padding: 24px 16px 64px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: 1.2; margin: 0 0 12px; }
+h1 { font-size: 30px; color: var(--saber); text-shadow: 0 0 14px #3dff8a55; }
+h2 { font-size: 20px; margin-top: 36px; }
+h3 { font-size: 16px; color: var(--dim); font-weight: 500; margin-top: 24px; }
+.sub { color: var(--dim); margin: -6px 0 18px; }
+.empty { color: var(--dim); border: 1px dashed var(--line); padding: 18px; }
+
+.msg { border: 1px solid var(--saber); padding: 10px 14px; margin-bottom: 18px; }
+.msg.error { border-color: var(--sith); color: var(--sith); }
+
+.table-wrap { overflow-x: auto; border-top: 1px solid var(--saber); }
+table { width: 100%; border-collapse: collapse; min-width: 560px; }
+th, td { padding: 10px 10px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+th { color: var(--dim); font-weight: 500; font-size: 15px; }
+th:nth-child(-n+2), td:nth-child(-n+2) { text-align: left; }
+td.name { font-weight: 600; font-size: 19px; }
+td.pts { font-family: var(--display); font-weight: 700; color: var(--saber); font-size: 19px; }
+tbody tr:first-child td.name { color: var(--saber); }
+.split { display: inline-block; vertical-align: middle; width: 84px; height: 6px; background: var(--sith); margin-left: 8px; }
+.split i { display: block; height: 100%; background: var(--saber); box-shadow: 0 0 8px #3dff8a99; }
+
+.panel { border: 1px solid var(--line); padding: 18px; margin-top: 36px; }
+.panel h2 { margin-top: 0; }
+
+textarea, input, select {
+  width: 100%; background: var(--void); color: var(--ink);
+  border: 1px solid var(--line); padding: 9px 10px; font: inherit; border-radius: 0;
+}
+textarea { min-height: 240px; font-size: 16px; }
+textarea:focus, input:focus, select:focus { border-color: var(--saber); outline: none; }
+.btn, button.btn {
+  display: inline-block; cursor: pointer; font-family: var(--display); font-size: 14px; font-weight: 700;
+  padding: 10px 18px; border: 1px solid var(--saber); background: var(--void); color: var(--saber);
+}
+.btn:hover { background: #3dff8a18; text-decoration: none; }
+.btn.primary { background: var(--saber); color: #000; }
+.btn.primary:hover { background: #7dffb0; }
+.btn.danger { border-color: var(--sith); color: var(--sith); }
+.btn.danger:hover { background: #ff2b2b18; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+.cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.card { display: block; border: 1px solid var(--line); border-left: 4px solid var(--dim); padding: 12px 16px; color: var(--ink); }
+.card:hover { border-color: var(--saber); text-decoration: none; }
+.card.win { border-left-color: var(--saber); }
+.card.loss { border-left-color: var(--sith); }
+.card .meta { display: block; color: var(--dim); font-size: 15px; }
+.card .vs { display: block; font-size: 20px; font-weight: 600; }
+.card .vs b { font-family: var(--display); margin: 0 6px; }
+
+.scoreboard { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; border: 1px solid var(--line); padding: 18px; text-align: center; }
+.scoreboard .team { font-size: 22px; font-weight: 700; }
+.scoreboard .big { font-family: var(--display); font-size: 40px; font-weight: 900; }
+.scoreboard .small { color: var(--dim); font-size: 15px; display: block; }
+.scoreboard.win { border-color: var(--saber); box-shadow: 0 0 18px #3dff8a22; }
+.scoreboard.loss { border-color: var(--sith); box-shadow: 0 0 18px #ff2b2b22; }
+.facts { color: var(--dim); margin: 12px 0 0; }
+
+table.match { min-width: 0; }
+table.match td { white-space: normal; }
+table.match td.code { color: var(--dim); width: 52px; text-align: left; }
+table.match td.home { text-align: left; }
+table.match td.away { text-align: right; }
+table.match td.score { text-align: center; font-family: var(--display); font-weight: 700; width: 84px; }
+table.match td.win { color: var(--saber); font-weight: 600; }
+table.match td.lose { color: var(--dim); }
+
+.errors, .warnings { margin: 0 0 14px; padding-left: 20px; }
+.errors { color: var(--sith); }
+.warnings { color: #ffd24a; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.two table { min-width: 0; }
+.fields > div { margin-bottom: 12px; }
+.fields label { display: block; color: var(--dim); font-size: 15px; margin-bottom: 4px; }
+.errorlist { color: var(--sith); list-style: none; padding: 0; margin: 4px 0; }
+.edit-row { display: grid; grid-template-columns: 44px 1fr 64px 64px 1fr; gap: 8px; align-items: start; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.edit-row .stack { display: grid; gap: 6px; }
+.edit-row input[type=number] { text-align: center; }
+.login { max-width: 380px; margin: 40px auto; }
+
+/* Classifica a fisarmonica */
+.board { min-width: 640px; }
+.board-head, .board summary {
+  display: grid; grid-template-columns: 34px 1fr 64px 108px 108px 150px;
+  align-items: center; gap: 0 8px; padding: 10px 10px;
+}
+.board-head { color: var(--dim); font-size: 15px; border-bottom: 1px solid var(--line); }
+.board-head span:nth-child(n+3), .board summary > span:nth-child(n+3) { text-align: right; white-space: nowrap; }
+.board details { border-bottom: 1px solid var(--line); }
+.board summary { cursor: pointer; list-style: none; }
+.board summary::-webkit-details-marker { display: none; }
+.board summary:hover { background: #3dff8a0d; }
+.board .name { font-weight: 600; font-size: 19px; }
+.board .name::before { content: "\25B8"; display: inline-block; width: 1.1em; color: var(--dim); }
+.board details[open] .name::before { content: "\25BE"; color: var(--saber); }
+.board details[open] > summary { background: #3dff8a0d; }
+.board details:first-of-type .name { color: var(--saber); }
+.board .pts { font-family: var(--display); font-weight: 700; color: var(--saber); font-size: 19px; }
+.drill { margin: 0 0 14px 22px; padding: 4px 10px 8px 14px; border-left: 2px solid var(--saber); }
+.drill table { min-width: 0; }
+.drill th, .drill td { padding: 7px 8px; font-size: 17px; }
+.drill .when { display: block; color: var(--dim); font-size: 14px; }
+
+@media (max-width: 640px) {
+  body { font-size: 17px; }
+  h1 { font-size: 24px; }
+  .two { grid-template-columns: 1fr; }
+  .scoreboard .big { font-size: 30px; }
+  .edit-row { grid-template-columns: 1fr 56px 56px; }
+  .edit-row .code, .edit-row .stack:first-of-type { grid-column: 1 / -1; }
+  .edit-row .stack:last-of-type { grid-column: 1 / -1; }
+}

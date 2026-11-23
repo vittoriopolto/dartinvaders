@@ -1,0 +1,45 @@
+{% extends "core/base.html" %}
+{% block title %}Modifica partita{% endblock %}
+{% block content %}
+<p class="sub"><a href="{% url 'fixture_detail' fixture.pk %}">Torna alla partita</a></p>
+<h1>Modifica partita</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="fields two">
+    {% for field in form %}
+    <div>
+      <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+      {{ field }}{{ field.errors }}
+    </div>
+    {% endfor %}
+  </div>
+
+  <h2>Match</h2>
+  <p class="sub">Casa a sinistra, ospiti a destra. I risultati ammessi sono 2-0, 2-1, 1-2, 0-2.</p>
+  {{ formset.management_form }}
+  {{ formset.non_form_errors }}
+  {% for f in formset %}
+  <div class="edit-row">
+    {{ f.id }}
+    <div class="code">{{ f.instance.code }}</div>
+    <div class="stack">{{ f.home_p1 }}{% if f.instance.kind == 'D' %}{{ f.home_p2 }}{% endif %}</div>
+    <div>{{ f.home_score }}</div>
+    <div>{{ f.away_score }}</div>
+    <div class="stack">{{ f.away_p1 }}{% if f.instance.kind == 'D' %}{{ f.away_p2 }}{% endif %}</div>
+    <div style="grid-column: 1 / -1">{{ f.non_field_errors }}{{ f.errors }}</div>
+  </div>
+  {% endfor %}
+
+  <div class="actions">
+    <button class="btn primary" type="submit">Salva modifiche</button>
+    <a class="btn" href="{% url 'fixture_detail' fixture.pk %}">Annulla</a>
+  </div>
+</form>
+
+<form method="post" action="{% url 'fixture_delete' fixture.pk %}" onsubmit="return confirm('Eliminare questa partita e tutti i suoi match?');">
+  {% csrf_token %}
+  <div class="actions"><button class="btn danger" type="submit">Elimina partita</button></div>
+</form>
+{% endblock %}

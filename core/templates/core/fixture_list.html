@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% block title %}Partite - DartsInvaders{% endblock %}
+{% block content %}
+<h1>Partite</h1>
+{% regroup fixtures by championship as groups %}
+{% for g in groups %}
+  <h2>{{ g.grouper.name }}</h2>
+  <ul class="cards">
+    {% for f in g.list %}
+    <li>
+      <a class="card {{ f.outcome }}" href="{% url 'fixture_detail' f.pk %}">
+        <span class="meta">Partita {{ f.number }}{% if f.turn %}, {{ f.turn }}{% endif %}{% if f.date %}, {{ f.date|date:"d/m/Y" }}{% endif %}</span>
+        <span class="vs">{{ f.home_team.name }} <b>{{ f.totals.home_sets }}-{{ f.totals.away_sets }}</b> {{ f.away_team.name }}</span>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+{% empty %}
+  <p class="empty">Nessuna partita caricata.</p>
+{% endfor %}
+{% endblock %}

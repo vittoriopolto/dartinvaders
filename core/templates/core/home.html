@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+{% block content %}
+<h1>{{ our_team }}</h1>
+<p class="sub">Classifica dei giocatori. Tocca un nome per vedere le sue partite.</p>
+
+{% if stats %}
+<div class="table-wrap">
+  <div class="board">
+    <div class="board-head">
+      <span>#</span><span>Giocatore</span><span>Punti</span>
+      <span>Match vinti</span><span>Leg vinti</span><span>% match vinti</span>
+    </div>
+
+    {% for s in stats %}
+    <details name="players">
+      <summary>
+        <span>{{ forloop.counter }}</span>
+        <span class="name">{{ s.player.name }}</span>
+        <span class="pts">{{ s.points }}</span>
+        <span>{{ s.won }} / {{ s.played }}</span>
+        <span>{{ s.legs_won }} / {{ s.legs_played }}</span>
+        <span>{{ s.pct|floatformat:0 }}%<span class="split"><i style="width: {{ s.pct|floatformat:'0u' }}%"></i></span></span>
+      </summary>
+
+      <div class="drill">
+        <table>
+          <thead>
+            <tr><th>Partita</th><th>Avversario</th><th>Punti</th><th>Match vinti</th><th>Leg vinti</th><th>% match</th></tr>
+          </thead>
+          <tbody>
+            {% for f in s.fixtures %}
+            <tr>
+              <td>
+                <a href="{% url 'fixture_detail' f.fixture.pk %}">{% if f.fixture.turn %}{{ f.fixture.turn }}{% else %}Partita {{ f.fixture.number }}{% endif %}</a>
+                {% if f.fixture.date %}<span class="when">{{ f.fixture.date|date:"d/m/Y" }}</span>{% endif %}
+              </td>
+              <td>{{ f.opponent.name }}</td>
+              <td class="pts">{{ f.points }}</td>
+              <td>{{ f.won }} / {{ f.played }}</td>
+              <td>{{ f.legs_won }} / {{ f.legs_played }}</td>
+              <td>{{ f.pct|floatformat:0 }}%</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </details>
+    {% endfor %}
+  </div>
+</div>
+{% else %}
+<p class="empty">Ancora nessun risultato. Carica il primo referto dal menu.</p>
+{% endif %}
+{% endblock %}

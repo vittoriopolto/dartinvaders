@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% block title %}{{ fixture.home_team.name }} - {{ fixture.away_team.name }}{% endblock %}
+{% block content %}
+<p class="sub"><a href="{% url 'fixture_list' %}">Tutte le partite</a></p>
+<h1>{{ fixture.championship.name }}</h1>
+
+<div class="scoreboard {{ outcome }}">
+  <div class="team">{{ fixture.home_team.name }}{% if fixture.home_captain %}<span class="small">Capitano {{ fixture.home_captain }}</span>{% endif %}</div>
+  <div>
+    <div class="big">{{ fixture.team_points.0 }}-{{ fixture.team_points.1 }}</div>
+    <span class="small">{{ fixture.totals.home_sets }}-{{ fixture.totals.away_sets }} set</span>
+    <span class="small">{{ fixture.totals.home_legs }}-{{ fixture.totals.away_legs }} leg</span>
+  </div>
+  <div class="team">{{ fixture.away_team.name }}{% if fixture.away_captain %}<span class="small">Capitano {{ fixture.away_captain }}</span>{% endif %}</div>
+</div>
+<p class="facts">
+  Partita {{ fixture.number }}{% if fixture.turn %}, {{ fixture.turn }}{% endif %}{% if fixture.date %}, {{ fixture.date|date:"j F Y" }}{% endif %}{% if fixture.venue %}, {{ fixture.venue }}{% endif %}
+</p>
+
+<div class="actions">
+  <a class="btn" href="{% url 'fixture_edit' fixture.pk %}">Modifica risultati</a>
+</div>
+
+<h2>Singoli</h2>
+{% include "core/_matches.html" with matches=singles %}
+
+<h2>Doppi</h2>
+{% include "core/_matches.html" with matches=doubles %}
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "core/base.html" %}
+{% block title %}Carica referto - DartsInvaders{% endblock %}
+{% block content %}
+<h1>Carica referto</h1>
+<p class="sub">Incolla il testo che ti restituisce Claude dalla foto del referto.</p>
+
+<form method="post">
+  {% csrf_token %}
+  <textarea name="text" placeholder="CAMPIONATO: ...&#10;PARTITA: ...">{{ text }}</textarea>
+  <div class="actions">
+    <button class="btn" name="action" value="preview">Controlla il referto</button>
+    {% if report and not report.errors %}
+    <button class="btn primary" name="action" value="save">Salva il referto</button>
+    {% endif %}
+  </div>
+</form>
+
+{% if report %}
+<section class="panel">
+  <h2>Controllo</h2>
+  {% if report.errors %}
+    <ul class="errors">{% for e in report.errors %}<li>{{ e }}</li>{% endfor %}</ul>
+    <p>Correggi il testo qui sopra e controlla di nuovo.</p>
+  {% else %}
+    {% if exists %}<p class="warnings">Questa partita esiste già: salvando verrà sostituita.</p>{% endif %}
+    {% if report.warnings %}<ul class="warnings">{% for w in report.warnings %}<li>{{ w }}</li>{% endfor %}</ul>{% endif %}
+
+    <p>
+      {{ report.championship }}<br>
+      Partita {{ report.number }}{% if report.turn %}, {{ report.turn }}{% endif %}{% if report.date %}, {{ report.date|date:"d/m/Y" }}{% endif %}{% if report.venue %}, {{ report.venue }}{% endif %}
+    </p>
+    <div class="scoreboard">
+      <div class="team">{{ report.home_team }}</div>
+      <div><div class="big">{{ report.totals.home_sets }}-{{ report.totals.away_sets }}</div><span class="small">{{ report.totals.home_legs }}-{{ report.totals.away_legs }} leg</span></div>
+      <div class="team">{{ report.away_team }}</div>
+    </div>
+
+    <div class="two">
+      <div>
+        <h3>Giocatori {{ report.home_team }}</h3>
+        <table><tbody>{% for code, name, tessera in report.roster_home %}<tr><td>{{ code }}</td><td>{{ name }}</td></tr>{% endfor %}</tbody></table>
+      </div>
+      <div>
+        <h3>Giocatori {{ report.away_team }}</h3>
+        <table><tbody>{% for code, name, tessera in report.roster_away %}<tr><td>{{ code }}</td><td>{{ name }}</td></tr>{% endfor %}</tbody></table>
+      </div>
+    </div>
+
+    <h3>Match</h3>
+    <div class="table-wrap">
+      <table class="match"><tbody>
+        {% for r in report.rows %}
+        <tr><td class="code">{{ r.code }}</td><td class="home">{{ r.home }}</td><td class="score">{{ r.score }}</td><td class="away">{{ r.away }}</td></tr>
+        {% endfor %}
+      </tbody></table>
+    </div>
+  {% endif %}
+</section>
+{% endif %}
+
+<details class="panel">
+  <summary>Formato del testo</summary>
+  <pre>CAMPIONATO: SoftDart Piemonte 2026 - Cat. A Girone 02
+PARTITA: 32
+TURNO: Ritorno 1
+DATA: 2026-11-12
+LUOGO: Vecchio Legno, Torino
+CASA: Dart Invaders | Capitano: Nome Cognome
+OSPITE: Rad-Tac | Capitano: Nome Cognome
+
+C1 | Nome Cognome | 07/1549
+O1 | Nome Cognome | 07/1667
+
+S1 | C1 | 1-2 | O1
+D1 | C1+C2 | 2-0 | O4+O5
+
+TOTALE: legs 34-10 | set 16-4 | punti 3-0</pre>
+</details>
+{% endblock %}

@@ -1,0 +1,14 @@
+<div class="table-wrap">
+  <table class="match">
+    <tbody>
+      {% for m in matches %}
+      <tr>
+        <td class="code">{{ m.code }}</td>
+        <td class="home {% if m.winner == 'home' %}win{% else %}lose{% endif %}">{{ m.home_names }}</td>
+        <td class="score">{{ m.home_score }}-{{ m.away_score }}</td>
+        <td class="away {% if m.winner == 'away' %}win{% else %}lose{% endif %}">{{ m.away_names }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
