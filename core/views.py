@@ -5,6 +5,7 @@ from django.db.models import Prefetch
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
+from .chart import build_chart
 from .forms import FixtureForm, MatchFormSet
 from .models import Fixture, Match
 from .parser import parse_report
@@ -28,9 +29,23 @@ def fixture_list(request):
         .prefetch_related("matches")
         .order_by("championship__name", "-date", "-number")
     )
+    ours = settings.OUR_TEAM_NAME.lower()
+    raw = []
     for f in fixtures:
         f.outcome = f.result_for(settings.OUR_TEAM_NAME)
-    return render(request, "core/fixture_list.html", {"fixtures": fixtures})
+        t = f.totals
+        if f.home_team.name.lower() == ours:
+            won, lost, opponent = t["home_sets"], t["away_sets"], f.away_team.name
+        elif f.away_team.name.lower() == ours:
+            won, lost, opponent = t["away_sets"], t["home_sets"], f.home_team.name
+        else:
+            continue
+        raw.append({"id": f.pk, "turn": f.turn, "date": f.date, "won": won, "lost": lost, "opponent": opponent})
+    return render(
+        request,
+        "core/fixture_list.html",
+        {"fixtures": fixtures, "chart": build_chart(raw)},
+    )
 
 
 def fixture_detail(request, pk):

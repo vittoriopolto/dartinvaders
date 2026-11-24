@@ -148,6 +148,19 @@ table.match td.lose { color: var(--dim); }
 .drill th, .drill td { padding: 7px 8px; font-size: 17px; }
 .drill .when { display: block; color: var(--dim); font-size: 14px; }
 
+/* Grafico dei set vinti */
+.chart-wrap { overflow-x: auto; border: 1px solid var(--line); padding: 8px; }
+svg.chart { display: block; width: 100%; min-width: 600px; height: auto; font-family: var(--body); }
+svg.chart .axis { stroke: #fff; stroke-width: 1.5; }
+svg.chart .grid { stroke: #ffffff1f; stroke-width: 1; }
+svg.chart .tick { fill: #fff; font-size: 14px; }
+svg.chart .axis-title { fill: #fff; font-size: 15px; }
+svg.chart .tie { stroke: var(--sith); stroke-width: 2; stroke-dasharray: 7 5; }
+svg.chart .tie-label { fill: var(--sith); font-size: 13px; }
+svg.chart .line { fill: none; stroke: var(--saber); stroke-width: 3; stroke-linejoin: round; filter: drop-shadow(0 0 5px #3dff8a99); }
+svg.chart .dot { fill: #000; stroke: var(--saber); stroke-width: 3; }
+svg.chart a:hover .dot { fill: var(--saber); }
+
 @media (max-width: 640px) {
   body { font-size: 17px; }
   h1 { font-size: 24px; }

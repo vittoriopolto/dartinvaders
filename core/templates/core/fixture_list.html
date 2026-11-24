@@ -2,6 +2,37 @@
 {% block title %}Partite - DartsInvaders{% endblock %}
 {% block content %}
 <h1>Partite</h1>
+
+{% if chart %}
+<h2>Set vinti per partita</h2>
+<div class="chart-wrap">
+  <svg class="chart" viewBox="0 0 {{ chart.width }} {{ chart.height }}" role="img" aria-label="Set vinti in ogni partita, con la linea del pareggio a 10">
+    {% for t in chart.yticks %}
+    <line class="grid" x1="{{ chart.left }}" x2="{{ chart.right }}" y1="{{ t.y }}" y2="{{ t.y }}"/>
+    <text class="tick" x="{{ t.tx }}" y="{{ t.y }}" text-anchor="end" dominant-baseline="middle">{{ t.value }}</text>
+    {% endfor %}
+
+    <line class="axis" x1="{{ chart.left }}" x2="{{ chart.left }}" y1="{{ chart.top }}" y2="{{ chart.bottom }}"/>
+    <line class="axis" x1="{{ chart.left }}" x2="{{ chart.right }}" y1="{{ chart.bottom }}" y2="{{ chart.bottom }}"/>
+
+    {% for t in chart.xticks %}
+    <text class="tick" x="{{ t.x }}" y="{{ t.y }}" text-anchor="middle">{{ t.value }}</text>
+    {% endfor %}
+
+    <text class="axis-title" x="{{ chart.xtitle_x }}" y="{{ chart.xtitle_y }}" text-anchor="middle">Partita</text>
+    <text class="axis-title" x="{{ chart.ytitle_x }}" y="{{ chart.ytitle_y }}" text-anchor="middle" transform="rotate(-90 {{ chart.ytitle_x }} {{ chart.ytitle_y }})">Set vinti</text>
+
+    <line class="tie" x1="{{ chart.left }}" x2="{{ chart.right }}" y1="{{ chart.tie_y }}" y2="{{ chart.tie_y }}"/>
+    <text class="tie-label" x="{{ chart.right }}" y="{{ chart.tie_label_y }}" text-anchor="end">Pareggio: 10 set</text>
+
+    <polyline class="line" points="{{ chart.line }}"/>
+    {% for d in chart.dots %}
+    <a href="{% url 'fixture_detail' d.id %}"><circle class="dot" cx="{{ d.cx }}" cy="{{ d.cy }}" r="5.5"><title>{{ d.title }}</title></circle></a>
+    {% endfor %}
+  </svg>
+</div>
+{% endif %}
+
 {% regroup fixtures by championship as groups %}
 {% for g in groups %}
   <h2>{{ g.grouper.name }}</h2>
